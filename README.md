@@ -16,6 +16,7 @@ Negate the input and write it out
     - subleq 254, 253 == 0 - INPUT == -INPUT
 
 Code:
+
     subleq @OUT, @IN
 
 ### Task: Data Directive and Looping
@@ -25,6 +26,7 @@ Use .data and Labels to loop
 - .data can be used to set up labeled constants, in this case '@zero: .data 0' to create a constant of 0 for looping
 
 Code:
+
     @loop:
     subleq @OUT, @IN
     subleq @zero, @zero, @loop
@@ -38,6 +40,7 @@ Use subleq to output any given input
     - subleq 0, -INPUT == 0 --INPUT == INPUT
 
 Code:
+
     @loop:
     subleq @tmp, @IN
     subleq @OUT, @tmp
@@ -53,6 +56,7 @@ Using subleq, sum two inputs and provide as output
     - variable is then output as 0 -- variable == 0 - (-INPUT - INPUT)
 
 Code:
+
     @loop:
     subleq @tmp, @IN
     subleq @tmp, @IN
@@ -65,6 +69,7 @@ Code:
 - Read A, then B. Then subtract A from B
 
 Code: 
+
     @loop:
     ; Saves input to tmp, flips value to positive
     subleq @tmp, @IN
