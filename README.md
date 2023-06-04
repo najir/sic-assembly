@@ -136,6 +136,59 @@ Code:
     @negone: .data -1
     @one: .data 1
 
+Code(Rewritten Ver2):
+
+    @loop:
+    subleq @tmp, @tmp
+    subleq @tmp, @IN, @GtEq
+    subleq @OUT, @one, @loop
+
+    @GtEq:
+    subleq @tmp, @negone, @outputGt
+    subleq @OUT, @OUT, @loop
+
+    @outputGt:
+    subleq @OUT, @negone
+    subleq @tmp, @tmp, @loop+3
+
+    @tmp: .data 0
+    @negone: .data -1
+    @one: .data 1
+
+### Task: Product of non-negative
+- Read two inputs and provide the product
+- Save input A to multiply
+- Set input B as a iterator, subtract until it executes new address
+- once iteration is done, or skipped, output result of a
+- Result must be positive, so several negations are done throughout
+
+Code:
+
+    @loop:
+    subleq @a, @IN
+    subleq @nega, @a
+    subleq @a, @a
+    subleq @negb, @IN
+    subleq @b, @negb, @output
+
+        @subloop:
+        subleq @a, @nega
+        subleq @b, @one, @output
+        subleq @MAX, @MAX, @subloop
+
+    @output:
+    subleq @OUT, @a
+    subleq @a, @a
+    subleq @negb, @negb
+    subleq @nega, @nega
+    subleq @b, @b, @loop
+
+    @a: .data 0
+    @b: .data 0
+    @negb: .data 0
+    @nega: .data 0
+    @one: .data 1
+
 ## Build
     Windows 11
     SIC-1 on Steam: https://store.steampowered.com/app/2124440/SIC1/
