@@ -67,6 +67,14 @@ Code:
 
 ### Task: Read, then output 2 variables
 - Read A, then B. Then subtract A from B
+- Save a loop address
+- Save 2 variables to represent 2 inputs and give us access to a variable we can set to 0 again for negating our values
+- Take input, save it to temp variable
+    - negate this input to make it positive
+    - reset on of our used variables back to 0
+- Subtract first input by new input
+    - use on of our reset variables to negate this value back to original
+- send result to output 
 
 Code: 
 
@@ -91,8 +99,42 @@ Code:
     @tmp: .data 0
     @zero: .data 0
 
+### Task: Sign Function
+- Read input, if < 0 output -1, if == 0 output 0, if > 0 output 1
+- If our x > 0, our tmp value is -x
+- if x == 0, tmp == 0
+- if x < 0, our temp is +x
+- Using subleq we can choose to continue to next address or skip to our Eq/Gt labels based on the subraction of certain numbers
+    - Our first subleq checks if our value is negative, as subleq would continue to the next address if the result is > 0
+    - Our second subleq checks if our value == 0, as adding a 1 to 0 would have our subleq continue to the next address
+    - Our last subleq must be greater then so just output
+
+Code: 
+
+    @loop:
+    ; If A < 0, subleq goes to next address
+    ; If A >= 0, subleq goes to @outputEq
+    subleq @tmp, @IN, @outputEq
+    subleq @OUT, @one
+    subleq @tmp, @tmp, @loop
 
 
+    @outputEq:
+    ; If A -(-1) > 0, subleq goes to next address
+    ; If A -(-1) <= 0, subleq goes to @outputGt
+    subleq @tmp, @negone, @outputGt
+    subleq @OUT, @zero
+    subleq @tmp, @tmp, @loop
+
+
+    @outputGt:
+    subleq @OUT, @negone
+    subleq @tmp, @tmp, @loop
+
+    @tmp: .data 0
+    @zero: .data 0
+    @negone: .data -1
+    @one: .data 1
 
 ## Build
     Windows 11
