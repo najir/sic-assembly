@@ -189,6 +189,58 @@ Code:
     @nega: .data 0
     @one: .data 1
 
+### Task: Division of non-negative
+- Read to inputs, produce the division and remainder of A and B
+- Save A/B variables, begin loop with a quotiant counter
+    - Each loop adds 1 to quotiant and removes B from A 
+    - Loops ends once A reachs <= 0
+- Move to remainder check when done
+    - Add back one set of B if A is less then 0
+    - Add this value to a remainder variable
+- Output data, clean variables, loop back to start
+*Going to refactor this before next task
+
+Code: 
+
+    @loop:
+    subleq @nega, @IN
+    subleq @a, @nega
+    subleq @negb, @IN
+    subleq @b, @negb, @output
+
+        @subloop:
+        subleq @quot, @one
+        subleq @a, @b, @quotcheck
+        subleq @MAX, @MAX, @subloop
+
+    @quotcheck:
+    subleq @zero, @a, @output
+    subleq @a, @negb
+    subleq @remainder, @a
+    subleq @quot, @negone
+
+    @output:
+    subleq @OUT, @quot
+    subleq @OUT, @remainder
+    subleq @a, @a
+    subleq @b, @b
+    subleq @nega, @nega
+    subleq @negb, @negb
+    subleq @quot, @quot
+    subleq @zero, @zero
+    subleq @remainder, @remainder, @loop
+
+    @zero: .data 0
+    @one: .data 1
+    @negone: .data -1
+    @a: .data 0
+    @nega: .data 0
+    @b: .data 0
+    @negb: .data 0
+    @quot: .data 0
+    @remainder: .data 0
+
+
 ## Build
     Windows 11
     SIC-1 on Steam: https://store.steampowered.com/app/2124440/SIC1/
