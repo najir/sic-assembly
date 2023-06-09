@@ -240,6 +240,43 @@ Code:
     @quot: .data 0
     @remainder: .data 0
 
+### Task: Sum of positive Int
+Read a sequence of positive numbers and output their sum. Repeat.
+- Take input, add it to a sum
+- Check if input is 0 by fliping it and see if subleq processes the new address
+- flip sum to output positive value
+- clear values and repeat
+
+Code: 
+
+    @loop:
+    subleq @a, @IN
+
+    @subloop:
+    subleq @sum, @a
+    subleq @a, @a
+    subleq @a, @IN
+    subleq @nega, @a, @output
+    subleq @nega, @nega, @subloop
+
+
+    @output:
+    subleq @negsum, @sum
+    subleq @OUT, @negsum
+    subleq @nega, @nega
+    subleq @a, @a
+    subleq @sum, @sum
+    subleq @negsum, @negsum, @loop
+
+
+
+    @negsum: .data 0
+    @one: .data 1
+    @negone: .data -1
+    @sum: .data 0
+    @a: .data 0
+    @nega: .data 0
+
 
 ## Build
     Windows 11
