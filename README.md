@@ -277,6 +277,30 @@ Code:
     @a: .data 0
     @nega: .data 0
 
+### Task: Count sequence of numbers
+Read through a sequence and output the total amount of numbers in the sequence
+- Take input, if not 0, add one to output
+- repeat inputs, once 0 is reached output the amount
+
+Code:    
+
+    @step:
+    subleq @temp, @IN, @add
+    subleq @MAX, @MAX, @end
+    @add:
+    subleq @output, @one
+    subleq @temp, @temp
+    subleq @temp, @negone
+    subleq @MAX, @MAX, @step
+
+    @end:
+    subleq @OUT, @output
+    subleq @output, @output, @step
+
+    @one: .data 1
+    @temp: .data 1
+    @negone: .data -1
+    @output: .data 0
 
 ## Build
     Windows 11
